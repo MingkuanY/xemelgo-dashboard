@@ -1,0 +1,62 @@
+@use "./mixin" as mixin;
+
+.tableContainer {
+  width: 100%;
+
+  .header {
+    display: flex;
+
+    .tableName {
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: mixin.$primary;
+    }
+  }
+
+  table {
+    margin-top: 1rem;
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+
+    /* generic text styling */
+
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: mixin.$primary;
+
+    th, td {
+      padding: 1.25rem;
+      text-align: left;
+    }
+
+    thead {
+      background-color: mixin.$blue;
+
+      th {
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: mixin.$white;
+
+        &:first-child {
+          border-top-left-radius: 0.5rem;
+        }
+        &:last-child {
+          border-top-right-radius: 0.5rem;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border: 0.1rem solid mixin.$border-gray;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          background-color: mixin.$background-gray;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@use "./mixin" as mixin;
+
+.solution {
+  text-decoration: underline;
+}
+
+.seeDetails {
+  color: mixin.$blue;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
