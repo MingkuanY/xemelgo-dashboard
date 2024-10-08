@@ -5,8 +5,8 @@ import styles from "../../styles/itemstable.module.scss"
 
 export default function ItemsTable({ data }: { data: Item[] }) {
   const navigate = useNavigate();
-  const handleDetailsClick = (id: number) => {
-    navigate(`/details/${id}`);
+  const handleDetailsClick = (name: number) => {
+    navigate(`/details/${name}`);
   }
 
   return (
@@ -16,11 +16,11 @@ export default function ItemsTable({ data }: { data: Item[] }) {
       data={data}
       renderRow={(item) => (
         <>
-          <td>Item {item.id}</td>
+          <td>Item {item.name}</td>
           <td className={styles.underline}>{item.solution}</td>
           <td>Storage {item.location}</td>
           <td>
-            <button className={styles.seeDetails} onClick={() => handleDetailsClick(item.id)}>See Details</button>
+            <button className={styles.seeDetails} onClick={() => handleDetailsClick(item.name)}>See Details</button>
           </td>
         </>
       )} />

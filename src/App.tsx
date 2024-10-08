@@ -7,27 +7,27 @@ import styles from "./styles/app.module.scss"
 
 const mockItems: Item[] = [
   {
-    id: 1,
+    name: 1,
     solution: "Asset",
     location: 1
   },
   {
-    id: 2,
+    name: 2,
     solution: "Inventory",
     location: 2
   },
   {
-    id: 3,
+    name: 3,
     solution: "Inventory",
     location: 2
   },
   {
-    id: 4,
+    name: 4,
     solution: "Asset",
     location: 3
   },
   {
-    id: 5,
+    name: 5,
     solution: "WO",
     location: 1
   },
@@ -35,19 +35,19 @@ const mockItems: Item[] = [
 
 const mockLocationHistory: LocationHistory[] = [
   {
-    storage: 2,
+    location: 2,
     time: new Date('2024-07-19T16:45:00')
   },
   {
-    storage: 3,
+    location: 3,
     time: new Date('2024-07-19T15:23:00')
   },
   {
-    storage: 1,
+    location: 1,
     time: new Date('2024-07-19T14:57:00')
   },
   {
-    storage: 4,
+    location: 4,
     time: new Date('2024-07-19T13:05:00')
   },
 ]
@@ -83,7 +83,7 @@ export default function App() {
         <Routes>
           <Route path="/">
             <Route index element={<Dashboard data={mockItems} />} />
-            <Route path="details/:id" element={<Details data={mockItems} location_history={mockLocationHistory} action_history={mockActionHistory} />} />
+            <Route path="details/:name" element={<Details data={mockItems} location_history={mockLocationHistory} action_history={mockActionHistory} />} />
           </Route>
         </Routes>
       </BrowserRouter>

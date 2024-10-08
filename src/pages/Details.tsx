@@ -6,9 +6,9 @@ import ActionHistoryTable from '../components/tables/ActionHistoryTable';
 import Icon from '../components/Icon';
 
 export default function Details({ data, location_history, action_history }: { data: Item[], location_history: LocationHistory[], action_history: ActionHistory[] }) {
-  const { id } = useParams<{ id: string }>();
+  const { name } = useParams<{ name: string }>();
 
-  const item = data.find((item) => item.id === Number(id))
+  const item = data.find((item) => item.name === Number(name))
 
   if (!item) {
     return <div>Item not found :(</div>
@@ -32,10 +32,10 @@ export default function Details({ data, location_history, action_history }: { da
 
   return (
     <div className={styles.main}>
-      <div className={styles.itemInfoContainer}>
+      <div className={styles.summaryContainer}>
         <div className={styles.topSection}>
           <p className={styles.itemHeading}>Item Name:</p>
-          <p className={styles.itemNumber}>Item {id}</p>
+          <p className={styles.itemNumber}>Item {name}</p>
           <button className={styles.consumeBtn}>Consume</button>
         </div>
         <div className={styles.middleSection}>

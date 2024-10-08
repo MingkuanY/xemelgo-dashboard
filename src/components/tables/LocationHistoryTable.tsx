@@ -12,7 +12,7 @@ export default function LocationHistoryTable({ data }: { data: LocationHistory[]
       data={data}
       renderRow={(item) => (
         <>
-          <td className={styles.underline}>Storage {item.storage}</td>
+          <td className={styles.underline}>Storage {item.location}</td>
           <td>{formatDate(item.time)}</td>
         </>
       )} />

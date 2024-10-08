@@ -5,13 +5,13 @@ export type Solution = "Asset" | "Inventory" | "WO"
 export type Action = "Scanned" | "Moved" | "Received"
 
 export type Item = {
-  id: number,
+  name: number,
   solution: Solution,
   location: number
 }
 
 export type LocationHistory = {
-  storage: number
+  location: number
   time: Date,
 }
 
