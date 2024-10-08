@@ -6,8 +6,8 @@ import { useState } from 'react';
 
 export default function ItemsTable({ data }: { data: Item[] }) {
   const navigate = useNavigate();
-  const handleDetailsClick = (name: number) => {
-    navigate(`/details/${name}`);
+  const handleDetailsClick = (item: Item) => {
+    navigate(`/${item.solution.toLowerCase()}/${item.name}`);
   }
 
   // Select all items with same solution type
@@ -37,7 +37,7 @@ export default function ItemsTable({ data }: { data: Item[] }) {
           <td className={styles.underline}>{item.solution}</td>
           <td>Storage {item.location}</td>
           <td>
-            <button className={styles.seeDetails} onClick={() => handleDetailsClick(item.name)}>See Details</button>
+            <button className={styles.seeDetails} onClick={() => handleDetailsClick(item)}>See Details</button>
           </td>
         </>
       )} />

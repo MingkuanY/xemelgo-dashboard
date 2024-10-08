@@ -83,7 +83,7 @@ export default function App() {
         <Routes>
           <Route path="/">
             <Route index element={<Dashboard data={mockItems} />} />
-            <Route path="details/:name" element={<Details data={mockItems} location_history={mockLocationHistory} action_history={mockActionHistory} />} />
+            <Route path=":solutionType/:name" element={<Details data={mockItems} location_history={mockLocationHistory} action_history={mockActionHistory} />} />
           </Route>
         </Routes>
       </BrowserRouter>
