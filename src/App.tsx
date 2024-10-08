@@ -24,10 +24,32 @@ export default function App() {
     fetchData();
   }, []);
 
+  // Sample users
+  const sample_users = [
+    {
+      user_name: 'Tabitha Ryne',
+      role: 'Xemelgo Administrator'
+    },
+    {
+      user_name: 'Claire Stroup',
+      role: 'Inventory Expert'
+    },
+    {
+      user_name: 'Curtis Trak',
+      role: 'Operations'
+    },
+    {
+      user_name: 'Jacob Eld',
+      role: 'Manager'
+    },
+  ]
+
+  const [users, setUsers] = useState(sample_users)
+
   return (
     <div className={styles.main}>
       <BrowserRouter>
-        <Header />
+        <Header users={users} />
         <Routes>
           <Route path="/">
             <Route index element={<Dashboard data={items} />} />

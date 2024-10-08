@@ -24,3 +24,8 @@ export type ActionHistory = {
   time: Date,
   item_name: number,
 }
+
+export type User = {
+  user_name: string,
+  role: string,
+}
