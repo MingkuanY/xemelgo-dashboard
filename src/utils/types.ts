@@ -6,17 +6,21 @@ export type Action = "Scanned" | "Moved" | "Received"
 
 export type Item = {
   name: number,
-  solution: Solution,
-  location: number
+  solution_type: Solution,
+  last_location: number
 }
 
 export type LocationHistory = {
-  location: number
+  id: number,
+  location_name: number,
   time: Date,
+  item_name: number
 }
 
 export type ActionHistory = {
-  user: string,
+  id: number,
+  user_name: string,
   action: Action,
-  time: Date
+  time: Date,
+  item_name: number,
 }

@@ -7,8 +7,10 @@ import Icon from '../components/Icon';
 import { useEffect, useRef, useState } from 'react';
 import classnames from 'classnames';
 
-export default function Details({ data, location_history, action_history }: { data: Item[], location_history: LocationHistory[], action_history: ActionHistory[] }) {
+export default function Details({ data }: { data: Item[] }) {
   const { name } = useParams<{ name: string }>();
+  const [actionHistory, setActionHistory] = useState<ActionHistory[]>([]);
+  const [locationHistory, setLocationHistory] = useState<LocationHistory[]>([]);
 
   const item = data.find((item) => item.name === Number(name))
 
@@ -16,13 +18,31 @@ export default function Details({ data, location_history, action_history }: { da
     return <div>Item not found :(</div>
   }
 
+  // Fetch location and action history by item name
+
+  useEffect(() => {
+    const fetchHistory = async () => {
+      try {
+        const response = await fetch(`http://localhost:5001/api/items/${name}/history`);
+        const data = await response.json();
+        console.log("data: ", data);
+        setActionHistory(data.actionHistory);
+        setLocationHistory(data.locationHistory);
+      } catch (error) {
+        console.error('Error fetching history:', error);
+      }
+    };
+
+    fetchHistory();
+  }, [name]);
+
   /**
    * Renders the corresponding texts based on the current item's solution type.
    *
    * @returns an object containing submit button and action button text
    */
   const renderActionTexts = () => {
-    switch (item.solution) {
+    switch (item.solution_type) {
       case "Asset":
         return { submitText: "Missing", actionText: "Move to" };
       case "Inventory":
@@ -73,11 +93,11 @@ export default function Details({ data, location_history, action_history }: { da
         <div className={styles.middleSection}>
           <div className={styles.infoContainer}>
             <p className={styles.heading}>Solution</p>
-            <p className={styles.name}>{item.solution}</p>
+            <p className={styles.name}>{item.solution_type}</p>
           </div>
           <div className={styles.infoContainer}>
             <p className={styles.heading}>Current Location</p>
-            <p className={styles.name}>Storage {item.location}</p>
+            <p className={styles.name}>Storage {item.last_location}</p>
           </div>
         </div>
         <div className={styles.actionContainer} ref={actionRef} >
@@ -100,8 +120,8 @@ export default function Details({ data, location_history, action_history }: { da
       </div>
 
       <div className={styles.right}>
-        <LocationHistoryTable data={location_history} />
-        <ActionHistoryTable data={action_history} />
+        <LocationHistoryTable data={locationHistory} />
+        <ActionHistoryTable data={actionHistory} />
       </div>
     </div>
   )

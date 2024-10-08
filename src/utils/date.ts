@@ -1,4 +1,11 @@
-export function formatDate(date: Date): string {
+/**
+ * Format a date to display in timestamp column.
+ *
+ * @param dateString the date in string format to convert
+ * @returns date formatted in "4:45 PM Jul 19" convention
+ */
+export function formatDate(dateString: string): string {
+  const date = new Date(dateString);
   // Format the time (hour and minute)
   const timeOptions: Intl.DateTimeFormatOptions = {
     hour: 'numeric',

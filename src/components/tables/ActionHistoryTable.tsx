@@ -9,14 +9,14 @@ export default function ActionHistoryTable({ data }: { data: ActionHistory[] }) 
   const [selectedUser, setSelectedUser] = useState<string | null>(null)
   const handleRowClick = (item: ActionHistory) => {
     // If user already selected, unselect it
-    if (selectedUser === item.user) {
+    if (selectedUser === item.user_name) {
       setSelectedUser(null);
     } else {
-      setSelectedUser(item.user);
+      setSelectedUser(item.user_name);
     }
   }
   const isRowHighlighted = (item: ActionHistory) => {
-    return item.user === selectedUser;
+    return item.user_name === selectedUser;
   }
 
   return (
@@ -30,7 +30,7 @@ export default function ActionHistoryTable({ data }: { data: ActionHistory[] }) 
         isRowHighlighted={isRowHighlighted}
         renderRow={(item) => (
           <>
-            <td className={styles.underline}>{item.user}</td>
+            <td className={styles.underline}>{item.user_name}</td>
             <td>{item.action}</td>
             <td>{formatDate(item.time)}</td>
           </>

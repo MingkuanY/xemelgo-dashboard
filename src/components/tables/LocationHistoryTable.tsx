@@ -9,14 +9,14 @@ export default function LocationHistoryTable({ data }: { data: LocationHistory[]
   const [selectedLocation, setSelectedLocation] = useState<number | null>(null)
   const handleRowClick = (item: LocationHistory) => {
     // If location already selected, unselect it
-    if (selectedLocation === item.location) {
+    if (selectedLocation === item.location_name) {
       setSelectedLocation(null);
     } else {
-      setSelectedLocation(item.location);
+      setSelectedLocation(item.location_name);
     }
   }
   const isRowHighlighted = (item: LocationHistory) => {
-    return item.location === selectedLocation;
+    return item.location_name === selectedLocation;
   }
 
   return (
@@ -29,7 +29,7 @@ export default function LocationHistoryTable({ data }: { data: LocationHistory[]
       isRowHighlighted={isRowHighlighted}
       renderRow={(item) => (
         <>
-          <td className={styles.underline}>Storage {item.location}</td>
+          <td className={styles.underline}>Storage {item.location_name}</td>
           <td>{formatDate(item.time)}</td>
         </>
       )} />
