@@ -30,7 +30,7 @@ export default function Table<T extends {}>({ name, subtitle, columns, data, ren
           {data.map((item, index) => (
             <tr key={index}
               onClick={() => onRowClick(item)}
-              className={isRowHighlighted(item) && styles.highlight}
+              className={isRowHighlighted(item) ? styles.highlight : ''}
             >
               {renderRow(item)}
             </tr>
