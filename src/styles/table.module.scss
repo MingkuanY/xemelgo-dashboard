@@ -5,11 +5,21 @@
 
   .header {
     display: flex;
+    align-items: center;
 
     .tableName {
       font-weight: 600;
       font-size: 1.25rem;
       color: mixin.$primary;
+    }
+
+    .subtitle {
+      margin-left: 0.9rem;
+      margin-top: 0.2rem;
+      font-weight: 600;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: mixin.$secondary;
     }
   }
 

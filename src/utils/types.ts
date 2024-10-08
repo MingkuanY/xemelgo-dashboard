@@ -1,8 +1,8 @@
 export type TableType = "ITEM" | "LOCATION" | "ACTION"
 
-export type Solution = "ASSET" | "INVENTORY" | "WO"
+export type Solution = "Asset" | "Inventory" | "WO"
 
-export type Action = "SCANNED" | "MOVED" | "RECEIVED"
+export type Action = "Scanned" | "Moved" | "Received"
 
 export type Item = {
   id: number,

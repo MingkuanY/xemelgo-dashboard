@@ -1,1 +1,98 @@
 @use "./mixin" as mixin;
+
+.main {
+  display: flex;
+
+  .itemInfoContainer {
+    width: 15rem;
+    height: fit-content;
+    padding: 1.3rem 1.2rem 2.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 0.1rem solid mixin.$border-gray;
+    border-radius: 0.3rem;
+
+    .topSection {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .itemHeading {
+        font-weight: 500;
+        font-size: 1.3rem;
+        color: mixin.$primary;
+      }
+
+      .itemNumber {
+        margin-top: 0.2rem;
+        font-weight: 700;
+        font-size: 1.3rem;
+      }
+
+      .consumeBtn {
+        margin-top: 1.5rem;
+        background-color: mixin.$blue;
+        font-weight: 600;
+        font-size: 1rem;
+        color: mixin.$white;
+        padding: 0.75rem 2.75rem;
+        border-radius: 0.3rem;
+        cursor: pointer;
+      }
+    }
+
+    .middleSection {
+      margin-top: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      .infoContainer {
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+
+        .heading {
+          font-weight: 500;
+          font-size: 1rem;
+          color: mixin.$secondary;
+        }
+
+        .name {
+          margin-top: 0.3rem;
+          margin-left: 0.8rem;
+          font-weight: 500;
+          font-size: 1rem;
+          color: mixin.$primary;
+        }
+      }
+    }
+
+    .actionBtn {
+      margin-top: 3.75rem;
+      width: 10rem;
+      border: 0.1rem solid mixin.$blue;
+      border-radius: 0.3rem;
+      padding: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+
+      font-weight: 600;
+      font-size: 1rem;
+      color: mixin.$blue;
+
+      .dropdown {
+        width: 1.3rem;
+        aspect-ratio: 1;
+      }
+    }
+  }
+
+  .right {
+    margin-left: 1.1rem;
+    flex-grow: 1;
+  }
+}

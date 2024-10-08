@@ -1,6 +1,8 @@
 @use "./mixin" as mixin;
 
-.solution {
+// general table styles
+
+.underline {
   text-decoration: underline;
 }
 
@@ -11,4 +13,8 @@
   &:hover {
     text-decoration: underline;
   }
+}
+
+.marginTop {
+  margin-top: 1.7rem;
 }
