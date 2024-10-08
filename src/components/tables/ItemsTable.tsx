@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { Item } from "../../utils/types";
+import { Item, Solution } from "../../utils/types";
 import Table from "./Table";
 import styles from "../../styles/itemstable.module.scss"
+import { useState } from 'react';
 
 export default function ItemsTable({ data }: { data: Item[] }) {
   const navigate = useNavigate();
@@ -9,11 +10,27 @@ export default function ItemsTable({ data }: { data: Item[] }) {
     navigate(`/details/${name}`);
   }
 
+  // Select all items with same solution type
+  const [selectedSolution, setSelectedSolution] = useState<Solution | null>(null)
+  const handleRowClick = (item: Item) => {
+    // If solution already selected, unselect it
+    if (selectedSolution === item.solution) {
+      setSelectedSolution(null);
+    } else {
+      setSelectedSolution(item.solution);
+    }
+  }
+  const isRowHighlighted = (item: Item) => {
+    return item.solution === selectedSolution;
+  }
+
   return (
     <Table<Item>
       name={"Item Table"}
       columns={['Item', 'Solution', 'Location', '']}
       data={data}
+      onRowClick={handleRowClick}
+      isRowHighlighted={isRowHighlighted}
       renderRow={(item) => (
         <>
           <td>Item {item.name}</td>

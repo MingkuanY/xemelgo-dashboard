@@ -36,7 +36,7 @@ export default function Details({ data, location_history, action_history }: { da
         <div className={styles.topSection}>
           <p className={styles.itemHeading}>Item Name:</p>
           <p className={styles.itemNumber}>Item {name}</p>
-          <button className={styles.consumeBtn}>Consume</button>
+          <button className={styles.submitBtn}>Consume</button>
         </div>
         <div className={styles.middleSection}>
           <div className={styles.infoContainer}>

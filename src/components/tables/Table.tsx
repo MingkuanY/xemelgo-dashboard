@@ -7,9 +7,11 @@ type TableProps<T> = {
   columns: string[];
   data: T[];
   renderRow: (item: T) => React.ReactNode;
+  onRowClick: (item: T) => void;
+  isRowHighlighted: (item: T) => boolean;
 }
 
-export default function Table<T extends {}>({ name, subtitle, columns, data, renderRow }: TableProps<T>) {
+export default function Table<T extends {}>({ name, subtitle, columns, data, renderRow, onRowClick, isRowHighlighted }: TableProps<T>) {
   return (
     <div className={styles.tableContainer}>
       <div className={styles.header}>
@@ -26,7 +28,12 @@ export default function Table<T extends {}>({ name, subtitle, columns, data, ren
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr key={index}>{renderRow(item)}</tr>
+            <tr key={index}
+              onClick={() => onRowClick(item)}
+              className={isRowHighlighted(item) && styles.highlight}
+            >
+              {renderRow(item)}
+            </tr>
           ))}
         </tbody>
       </table>

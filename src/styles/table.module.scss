@@ -63,7 +63,7 @@
         cursor: pointer;
         transition: 0.3s;
 
-        &:hover {
+        &.highlight {
           background-color: mixin.$background-gray;
         }
       }
