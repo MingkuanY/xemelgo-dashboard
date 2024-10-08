@@ -25,7 +25,6 @@ export default function Details({ data }: { data: Item[] }) {
       try {
         const response = await fetch(`http://localhost:5001/api/items/${name}/history`);
         const data = await response.json();
-        console.log("data: ", data);
         setActionHistory(data.actionHistory);
         setLocationHistory(data.locationHistory);
       } catch (error) {
