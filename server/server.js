@@ -59,6 +59,39 @@ app.post('/api/items', (req, res) => {
   );
 });
 
+// Add a new location action by item
+app.post('/api/items/:name/location-history', (req, res) => {
+  const { location_name } = req.body;
+  const { name } = req.params;
+
+  console.log(`called in server for ${location_name}`)
+
+  // Get current timestamp
+  const currentTime = new Date().toISOString();
+
+  db.get('SELECT MAX(id) as maxId FROM LocationHistory', (err, row) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+
+    const newId = (row.maxId || 0) + 1; // Increment from the maxId
+
+    // Insert the new record with the incremented ID and current time
+    db.run(
+      'INSERT INTO LocationHistory (id, location_name, time, item_name) VALUES (?, ?, ?, ?)',
+      [newId, location_name, currentTime, name],
+      function (err) {
+        if (err) {
+          res.status(500).json({ error: err.message });
+          return;
+        }
+        res.status(201).json({ id: this.lastID });
+      }
+    );
+  });
+});
+
 // Fetch action and location history for the item from the database
 app.get('/api/items/:name/history', (req, res) => {
   const itemName = req.params.name;

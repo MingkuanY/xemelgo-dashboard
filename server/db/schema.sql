@@ -7,7 +7,7 @@ CREATE TABLE Item (
 CREATE TABLE LocationHistory (
   id INTEGER PRIMARY KEY,
   location_name INTEGER,
-  time DATETIME,
+  time TEXT,
   item_name INTEGER,
   FOREIGN KEY (item_name) REFERENCES Item(name)
 );
@@ -16,7 +16,7 @@ CREATE TABLE ActionHistory (
   id INTEGER PRIMARY KEY,
   user_name TEXT,
   action TEXT CHECK(action IN ('Scanned', 'Moved', 'Received')),
-  time DATETIME,
+  time TEXT,
   item_name INTEGER,
   FOREIGN KEY (item_name) REFERENCES Item(name)
 );

@@ -14,10 +14,6 @@ export default function Details({ data }: { data: Item[] }) {
 
   const item = data.find((item) => item.name === Number(name))
 
-  if (!item) {
-    return <div>Item not found :(</div>
-  }
-
   // Fetch location and action history by item name
 
   useEffect(() => {
@@ -35,33 +31,10 @@ export default function Details({ data }: { data: Item[] }) {
     fetchHistory();
   }, [name]);
 
-  /**
-   * Renders the corresponding texts based on the current item's solution type.
-   *
-   * @returns an object containing submit button and action button text
-   */
-  const renderActionTexts = () => {
-    switch (item.solution_type) {
-      case "Asset":
-        return { submitText: "Missing", actionText: "Move to" };
-      case "Inventory":
-        return { submitText: "Consume", actionText: "Scan at" };
-      case "WO":
-        return { submitText: "Complete", actionText: "Receive at" };
-    }
-  }
-
-  const { submitText, actionText } = renderActionTexts();
-
   // Location selection dropdown logic
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const actionRef = useRef<HTMLDivElement>(null);
-
-  const handleStorageSelect = (storageNumber: number) => {
-    setIsDropdownOpen(false);
-    setSelectedLocation(storageNumber);
-  }
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -80,6 +53,61 @@ export default function Details({ data }: { data: Item[] }) {
   const storageLocations = [1, 2, 3, 4]
 
   const [selectedLocation, setSelectedLocation] = useState<number | null>(null);
+
+
+  // When user makes a location action
+
+  const addLocationHistory = async (item_name: number, location: number) => {
+    try {
+      console.log(`called in client for ${location}`)
+      const response = await fetch(`http://localhost:5001/api/items/${item_name}/location-history`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          location_name: location, // match the field name expected by the backend
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add location history');
+      }
+
+      const data = await response.json();
+      console.log('Location history added:', data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  if (!item) {
+    return <div>Item not found :(</div>
+  }
+
+  const handleStorageSelect = (storageNumber: number) => {
+    setIsDropdownOpen(false);
+    setSelectedLocation(storageNumber);
+    addLocationHistory(item.name, storageNumber);
+  }
+
+  /**
+   * Renders the corresponding texts based on the current item's solution type.
+   *
+   * @returns an object containing submit button and action button text
+   */
+  const renderActionTexts = () => {
+    switch (item.solution_type) {
+      case "Asset":
+        return { submitText: "Missing", actionText: "Move to" };
+      case "Inventory":
+        return { submitText: "Consume", actionText: "Scan at" };
+      case "WO":
+        return { submitText: "Complete", actionText: "Receive at" };
+    }
+  }
+
+  const { submitText, actionText } = renderActionTexts();
 
   return (
     <div className={styles.main}>

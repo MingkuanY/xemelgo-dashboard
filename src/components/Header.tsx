@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react'
 import styles from '../styles/header.module.scss'
 import { User } from '../utils/types'
@@ -5,6 +6,7 @@ import Icon from './Icon'
 import classNames from 'classnames';
 
 export default function Header({ users }: { users: User[] }) {
+  const navigate = useNavigate();
   const [currUser, setCurrUser] = useState(users[0]);
 
   // User selection dropdown logic
@@ -29,10 +31,9 @@ export default function Header({ users }: { users: User[] }) {
     }
   })
 
-  const [selectedUser, setSelectedUser] = useState<number | null>(null);
-
   return (
     <div className={styles.main}>
+      <p className={styles.dashboard} onClick={() => navigate(`/`)}>Xemelgo</p>
       <div className={styles.userBtn} ref={userRef} onClick={() => setIsDropdownOpen(prev => !prev)}>
         <div className={styles.left}>
           <p className={styles.username}>{currUser.user_name}</p>
